@@ -1,0 +1,3 @@
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/LinkedList/Standard/build/CMakeFiles/mainApp.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/LinkedList/Standard/build/CMakeFiles/edit_cache.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/LinkedList/Standard/build/CMakeFiles/rebuild_cache.dir
