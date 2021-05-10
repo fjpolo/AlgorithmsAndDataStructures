@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/Algorithms/001BinarySearchAlgorithm/Recursive/src/main.cpp
+cstdio
+-
+iostream
+-
+queue
+-
+
