@@ -1,18 +1,20 @@
 #include <cstdio>
 #include <iostream>
 #include <math.h>
+#include <cmath>
+
 
 /**
  * \brief   Bit Manipulation problems
  * 
  *          Reference:
  *              https://medium.com/techie-delight/bit-manipulation-interview-questions-and-practice-problems-27c0e71412e7
- * 
+ *              https://ptgmedia.pearsoncmg.com/images/9780321842688/samplepages/0321842685.pdf 
  */
     
 
 /**
- * \struct  Node  
+ * \struct    
  * 
  * \brief  
  */
@@ -23,6 +25,11 @@
  * \brief   
  */
 
+/**
+ * \brief Private functions
+ * 
+ */
+namespace{
 /**
  * \fn      bool isOdd(int x)
  * 
@@ -73,7 +80,6 @@ void TurnBitOff(int &val, const int k){
     val &= ~(1 << (k-1)); 
 }
 
-
 /**
  * \fn      void TurnBitOn(int &val, const int k)  
  * 
@@ -82,7 +88,6 @@ void TurnBitOff(int &val, const int k){
 void TurnBitOn(int &val, const int k){
     val |= (1 << (k-1)); 
 }
-
 
 /**
  * \fn      bool isBitSet(const int val, const int k)  
@@ -119,6 +124,27 @@ void UnsetRighmostBit(int &n){
 bool isPow2(const unsigned int n){
     return static_cast<bool>(!(n & (n-1)));
     // return static_cast<bool>((std::log2(n & -n) + 1) == n);
+}
+
+/**
+ * \fn      bool isPow4(const unsigned int a)           
+ * 
+ * \brief   Return true if positive integer is a power of 4
+ */
+bool isPow4(const unsigned int n){
+    return !(n & (n - 1))&& (n % 3 == 1);
+}
+
+/**
+ * \fn      bool isPow8(const unsigned int a)           
+ * 
+ * \brief   Return true if positive integer is a power of 8
+ */
+bool isPow8(const unsigned int n){
+    // find `log8(n)`
+    double i = log(n) / log(8);
+    // return true if `log8(n)` is an integer
+    return i - trunc(i) < 0.000001;
 }
 
 /**
@@ -180,13 +206,103 @@ unsigned int AbsoluteValue(const int n){
     return 0;
 }
 
+/**
+ * \fn      int countSetBits(int n)       
+ * 
+ * \brief   Returns the total number of set bits in `n`        
+ */ 
+int countSetBits(int n){
+    // `count` stores the total bits set in `n`
+    int count = 0;
+    while (n){
+        UnsetRighmostBit(n);    // clear the least significant bit set
+        count++;
+    }
+    return count;
+}
+
+/**
+ * \fn      int findBitsToBeFlipped(int x, int y)       
+ * 
+ * \brief   Returns the total number of bits needed to be flipped to convert `x` to `y`        
+ */
+int findBitsToBeFlipped(int x, int y){
+    // take XOR of x and y and store in n
+    int n = x ^ y;
+    // Using Brian Kernighan’s algorithm to count set bits
+    return countSetBits(n);
+}
+
+/**
+ * \fn      unsigned findNextPowerOf2(unsigned n)      
+ * 
+ * \brief   Return: Compute power of two greater than or equal to `n`        
+ */
+unsigned findNextPowerOf2(unsigned n){
+    // decrement `n` (to handle the case when `n` itself is a power of 2)
+    n--;
+ 
+    // set all bits after the last set bit
+    n |= n >> 1;
+    n |= n >> 2;
+    n |= n >> 4;
+    n |= n >> 8;
+    n |= n >> 16;
+ 
+    // increment `n` and return
+    return ++n;
+}
+
+/**
+ * \fn      unsigned findPreviousPowerOf2(unsigned n)      
+ * 
+ * \brief   Return: Compute a power of two less than or equal to `n`        
+ */
+unsigned findPreviousPowerOf2(unsigned n){
+    // set all bits after the last set bit
+    n = n | (n >> 1);
+    n = n | (n >> 2);
+    n = n | (n >> 4);
+    n = n | (n >> 8);
+    n = n | (n >> 16);
+ 
+    // drop all but the last set bit from `n`
+    return n - (n >> 1);
+}
+
+/**
+ * \fn      int superPower(int x, unsigned n)     
+ * 
+ * \brief   Iterative function to calculate `pow(x, n)` using binary operators. O(log(n))        
+ */
+
+int superPower(int x, unsigned n){
+
+    // initialize result by 1
+    int pow = 1;
+    // loop till `n` become 0
+    while (n){
+        // if `n` is odd, multiply the result by `x`
+        if (n & 1) {
+            pow *= x;
+        }
+        // divide `n` by 2
+        n = n >> 1;
+        // multiply `x` by itself
+        x *= x;
+    }
+ 
+    // return result
+    return pow;
+}
+} // END namespace
 
 
 /**
- * @brief Tasks
+ * \brief Tasks
  * 
  */
-
+namespace Task{
 /*Tasks*/
 void BasicTask(){
     /**
@@ -263,7 +379,7 @@ void kthBitTask(){
     std::cout << std::endl;
 }
 /*RigmostSetBit*/
-void RigmostSetBit(){
+void RigmostSetBitTask(){
     /**
      * Righmost set bit 
      */
@@ -299,6 +415,64 @@ void RigmostSetBit(){
     std::cout << std::endl;
     std::cout << std::endl;
 }
+/*FlippingBitsTask*/
+void FlippingBitsTask(){
+    /**
+     * Find the total number of bits needed to be flipped
+     */
+    std::cout << "Find the total number of bits needed to be flipped:" << std::endl;
+    int a{65};
+    int b{80};
+    std::cout << a << " | " << b << " -> " << findBitsToBeFlipped(a, b) << " bits to be flipped." << std::endl << std::endl << std::endl;
+}
+/*PowerTask*/
+void PowerTask(){
+    /**
+     * Problems with Power (2, 4, 8...)
+     */
+    std::cout << "Problems with Power:" << std::endl << std::endl;
+
+    /*Round up to the next highest power of 2*/
+    std::cout << "Round up to the next highest power of 2:" << std::endl;
+    unsigned n = 131;
+    std::cout << "The next power of 2 of " << n << " is "<< findNextPowerOf2(n) << std::endl;
+    std::cout << std::endl;
+
+    /*Round up to the previous  highest power of 2*/
+    std::cout << "Round up to the previous  highest power of 2:" << std::endl;
+    std::cout << "The previous  power of 2 of " << n << " is "<< findPreviousPowerOf2(n) << std::endl;
+    std::cout << std::endl;
+
+    /*Check if a positive integer is a power of 2*/
+    std::cout << "Check if a positive integer is a power of 2:" << std::endl;
+    if(isPow2(n)) std::cout << n << " is a power of 2." << std::endl;
+    else std::cout << n << " is not a power of 2." << std::endl;
+    std::cout << std::endl;
+
+    /*Check if a positive integer is a power of 4*/
+    std::cout << "Check if a positive integer is a power of 4:" << std::endl;
+    if(isPow4(n)) std::cout << n << " is a power of 4." << std::endl;
+    else std::cout << n << " is not a power of 4." << std::endl;
+    std::cout << std::endl;
+
+    /*Check if a positive integer is a power of 8*/
+    std::cout << "Check if a positive integer is a power of 8:" << std::endl;
+    if(isPow8(n)) std::cout << n << " is a power of 8." << std::endl;
+    else std::cout << n << " is not a power of 8." << std::endl;
+    std::cout << std::endl;
+
+    /*Efficiently implement power function*/
+    std::cout << "Check if a positive integer is a power of 8:" << std::endl;
+    int x = -2;
+    unsigned m = 10;
+    std::cout << "pow(" << x << "," << m << ") = " << superPower(x, m) << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+}
+
+} // END namespace Task
+
+
 
 
 /**
@@ -309,10 +483,13 @@ void RigmostSetBit(){
 int main(){
     /*Say hi*/
     std::cout << "Bit Manipulation problems: " << std::endl << std::endl << std::endl << std::endl;
+    
     /*Tasks*/
-    BasicTask();
-    kthBitTask();
-    RigmostSetBit();
+    Task::BasicTask();
+    Task::kthBitTask();
+    Task::RigmostSetBitTask();
+    Task::FlippingBitsTask();
+    Task::PowerTask();
     
     return 0;
 }
