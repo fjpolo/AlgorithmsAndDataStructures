@@ -1,3 +1,0 @@
-C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/QueueWithLinkedList/build/CMakeFiles/mainApp.dir
-C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/QueueWithLinkedList/build/CMakeFiles/edit_cache.dir
-C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/QueueWithLinkedList/build/CMakeFiles/rebuild_cache.dir
