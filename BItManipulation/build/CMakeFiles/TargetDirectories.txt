@@ -1,0 +1,3 @@
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/BItManipulation/build/CMakeFiles/mainApp.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/BItManipulation/build/CMakeFiles/edit_cache.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/BItManipulation/build/CMakeFiles/rebuild_cache.dir
