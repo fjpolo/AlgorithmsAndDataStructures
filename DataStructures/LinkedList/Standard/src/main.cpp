@@ -68,7 +68,7 @@ Node* constructList(std::vector<int> const &keys){
     Node* head = nullptr;
  
     // start from the end of the array
-    for (int key: keys){
+    for (auto key: keys){
         // Note that no extra use `&` necessary — the compiler takes
         // care of it here too. These calls are changing the head.
         push(head, key);
