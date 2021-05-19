@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/DataStructures/QueueWithArray/Class/src/main.cpp
+cstdio
+-
+cstdlib
+-
+iostream
+-
+string
+-
+list
+-
+
