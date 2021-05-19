@@ -27,14 +27,14 @@
 	✖ Insertion
 	✖ Searching
 	✖ Deletion
-✖ Stack implementation using an array
-	✖ Class
-	✖ std::list
-	✖ std::queue
-	✖ Class Template
-✖ Stack Implementation using a Linked List
-	✖ Class
-	✖ Clas Template
+✔ Stack implementation using an array
+	✔ Class
+	✔ std::list
+	✔ std::stack
+	✔ Class Template
+✔ Stack Implementation using a Linked List
+	✔ Class
+	✔ Class Template
 ✔ Queue implementation using an array
 	✔ Class
 	✔ std::list
@@ -42,7 +42,7 @@
 	✔ Class Template
 ✔ Queue Implementation using a Linked List
 	✔ Class
-	✔ Clas Template
+	✔ Class Template
 ✖ Min Heap and Max Heap
 ✖ Graph
 ✖ Trie
@@ -72,6 +72,10 @@
 ✔ Check if a number is a power of 8 or not
 ✔ Round up to the next highest power of 2
 ✔ Round up to the previous power of 2
+✔ Compute the parity of a number using a lookup table
+✔ Count set bits using a lookup table
+✔ Reverse bits of an integer using a lookup table
+
 
 
 ## References
