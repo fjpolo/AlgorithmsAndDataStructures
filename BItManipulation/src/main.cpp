@@ -5,6 +5,44 @@
 
 
 /**
+ * \brief Macros 
+ */
+
+// Macros to generate the lookup table (at compile-time)
+#define P2(n) n, n^1, n^1, n
+#define P4(n) P2(n), P2(n^1), P2(n^1), P2(n)
+#define P6(n) P4(n), P4(n^1), P4(n^1), P4(n)
+#define FIND_PARITY P6(0), P6(1), P6(1), P6(0)
+
+// Macros to generate the lookup table (at compile-time)
+#define B2(n) n, n + 1, n + 1, n + 2
+#define B4(n) B2(n), B2(n + 1), B2(n + 1), B2(n + 2)
+#define B6(n) B4(n), B4(n + 1), B4(n + 1), B4(n + 2)
+#define COUNT_BITS B6(0), B6(1), B6(1), B6(2)
+
+// Macros to generate the lookup table (at compile-time)
+#define R2(n) n, n + 2*64, n + 1*64, n + 3*64
+#define R4(n) R2(n), R2(n + 2*16), R2(n + 1*16), R2(n + 3*16)
+#define R6(n) R4(n), R4(n + 2*4 ), R4(n + 1*4 ), R4(n + 3*4 )
+#define REVERSE_BITS R6(0), R6(2), R6(1), R6(3)
+
+
+
+/**
+ * @brief Constants
+ */
+
+// lookup table to store the parity of each index of the table.
+// The macro `FIND_PARITY` generates the table
+constexpr unsigned int lookupParity[256] = { FIND_PARITY };
+// Lookup table to store the total number of bits set for each index
+// in the table. The macro `COUNT_BITS` generates the table.
+constexpr unsigned int lookupCount[256] = { COUNT_BITS };
+// lookup table to store the reverse of each index of the table.
+// The macro `REVERSE_BITS` generates the table
+constexpr unsigned int lookupReverse[256] = { REVERSE_BITS };
+
+/**
  * \brief   Bit Manipulation problems
  * 
  *          Reference:
@@ -275,7 +313,6 @@ unsigned findPreviousPowerOf2(unsigned n){
  * 
  * \brief   Iterative function to calculate `pow(x, n)` using binary operators. O(log(n))        
  */
-
 int superPower(int x, unsigned n){
 
     // initialize result by 1
@@ -295,6 +332,71 @@ int superPower(int x, unsigned n){
     // return result
     return pow;
 }
+
+/**
+ * \fn      int findParityLUT(int x)     
+ * 
+ * \brief   Function to find parity of `x`        
+ */
+
+int findParityLUT(int x){
+    // Assuming 32–bit (4 bytes) integer, break the integer into
+    // 16–bit chunks and take their XOR
+    x ^= x >> 16;
+ 
+    // Again split the 16–bit chunk into 8–bit chunks and take their XOR
+    x ^= x >> 8;
+ 
+    // Note mask used 0xff is 11111111 in binary
+    return lookupParity[x & 0xff];
+}
+
+/**
+ * \fn      int countSetBitsLUT(int n)     
+ * 
+ * \brief   Function to count the total number of set bits in `n` using a lookup table    
+ */
+int countSetBitsLUT(int n){
+    // print lookup table (number of bits set for integer `i`)
+    // for (int i = 0; i < 256; i++) std::cout << i << " has " << lookupCount[i] << " bits\n";
+    
+ 
+    // Assuming a 32–bit (4 bytes) integer, break the integer into 8–bit chunks.
+    // Note that mask used `0xff` is `11111111` in binary
+    int count = lookupCount[n & 0xff] +      // consider the first 8 bits
+        lookupCount[(n >> 8) & 0xff] +       // consider the next 8 bits
+        lookupCount[(n >> 16) & 0xff] +      // consider the next 8 bits
+        lookupCount[(n >> 24) & 0xff];       // consider last 8 bits
+ 
+    return count;
+}
+
+/**
+ * \fn      int countSetBitsLUT(int n)     
+ * 
+ * \brief   Function to reverse bits of `n` using a lookup table
+    
+ */
+int reverseBits(int n){
+    // print lookup table (reverse of integer `i`)
+    // for (int i = 0; i < 256; i++) cout << i << " reverse is " << (int)lookup[i] << endl;
+
+ 
+    /* Assuming a 32–bit (4 bytes) integer, break the integer into 8–bit chunks.
+       Note mask used `0xff` is `11111111` in binary */
+ 
+    // split, reverse, and rearrange each chunk
+ 
+    int reverse = lookupReverse[n & 0xff] << 24 |      // consider the first 8 bits
+        lookupReverse[(n >> 8) & 0xff] << 16 |         // consider the next 8 bits
+        lookupReverse[(n >> 16) & 0xff] << 8 |         // consider the next 8 bits
+        lookupReverse[(n >> 24) & 0xff];               // consider last 8 bits
+ 
+    return reverse;
+}
+
+
+
 } // END namespace
 
 
@@ -469,6 +571,57 @@ void PowerTask(){
     std::cout << std::endl;
     std::cout << std::endl;
 }
+/*ParityTask*/
+void LUTTask(){
+    std::cout << "Using LUTs:" << std::endl;
+
+
+    /**
+    * We can use a LUT to find parity in constant time.-
+    * 
+    * https://www.techiedelight.com/compute-parity-number-using-lookup-table/
+    */
+   std::cout << "Calculate parity in O(1):" << std::endl;
+   int32_t x = 318465;
+   std::cout << x << " has parity " << findParityLUT(x) << std::endl;
+   x = 0;
+   std::cout << x << " has parity " << findParityLUT(x) << std::endl;
+   x = -61846;
+   std::cout << x << " has parity " << findParityLUT(x) << std::endl;
+   std::cout << std::endl;
+
+   /**
+   * We can use a LUT to count set bits in constant time.-
+   * 
+   * https://www.techiedelight.com/count-set-bits-using-lookup-table/
+   */
+   std::cout << "Count number of set bits in O(1):" << std::endl;
+   x = 318465;
+   std::cout << x << " has " << countSetBitsLUT(x) << " bits set." << std::endl;
+   x = 0;
+   std::cout << x << " has " << countSetBitsLUT(x) << " bits set." << std::endl;
+   x = -61846;
+   std::cout << x << " has " << countSetBitsLUT(x) << " bits set." << std::endl;
+   std::cout << std::endl;
+
+
+
+   /**
+   * Using LUTs we can reverse numbers bits in constant time.-
+   * 
+   * https://www.techiedelight.com/reverse-bits-integer-using-lookup-table/
+   */
+   std::cout << "Reverse bits in a number in O(1):" << std::endl;
+   x = 318465;
+   std::cout << x << " bit-reversed is " << reverseBits(x) << std::endl;
+   x = 0;
+   std::cout << x << " bit-reversed is " << reverseBits(x) << std::endl;
+   x = -61846;
+   std::cout << x << " bit-reversed is " << reverseBits(x) << std::endl;
+   std::cout << std::endl << std::endl;
+
+}
+
 
 } // END namespace Task
 
@@ -484,12 +637,13 @@ int main(){
     /*Say hi*/
     std::cout << "Bit Manipulation problems: " << std::endl << std::endl << std::endl << std::endl;
     
-    /*Tasks*/
+    // /*Tasks*/
     Task::BasicTask();
     Task::kthBitTask();
     Task::RigmostSetBitTask();
     Task::FlippingBitsTask();
     Task::PowerTask();
+    Task::LUTTask();
     
     return 0;
 }

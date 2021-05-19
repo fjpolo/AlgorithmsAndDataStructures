@@ -57,10 +57,10 @@
 ✔ Detect if two integers have opposite signs or not
 ✔ Add 1 to an integer
 ✔ Swap two numbers without using any third variable.
-✔ Turn off k’th bit in a number.
-✔ Turn on k’th bit in a number.
-✔ Check if k’th bit is set for a number.
-✔ Toggle the k’th bit.
+✔ Turn off kth bit in a number.
+✔ Turn on kth bit in a number.
+✔ Check if kth bit is set for a number.
+✔ Toggle the kth bit.
 ✔ Check if a positive integer is a power of 2 without using any branching or loop
 ✔ Find position of the rightmost set bit
 ✔ Find position of the only set bit in a number
