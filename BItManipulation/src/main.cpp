@@ -571,7 +571,7 @@ void PowerTask(){
     std::cout << std::endl;
     std::cout << std::endl;
 }
-/*ParityTask*/
+/*LUTTask*/
 void LUTTask(){
     std::cout << "Using LUTs:" << std::endl;
 
