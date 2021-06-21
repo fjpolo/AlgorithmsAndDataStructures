@@ -1,0 +1,27 @@
+#adding project folders:
+add_subdirectory(FloydsCycleDetectionAlgorithm)
+add_subdirectory(SearchAlgorithm_DepthFirst)
+add_subdirectory(TreeTraversals_Binary)
+
+
+
+# add_subdirectory(BellmanFordAlgorithm)
+# add_subdirectory(DijkstrasAlgorithm)
+# add_subdirectory(FloodFillAlgorithm)
+# add_subdirectory(FloydWarshallAlgorithm)
+# add_subdirectory(KadanesAlgorithm)
+# add_subdirectory(KruskalsAlgorithm)
+# add_subdirectory(LeeAlgorithm)
+# add_subdirectory(SearchAlgorithm_BreadthFirst)
+# add_subdirectory(Sort_Counting)
+# add_subdirectory(Sort_Heap)
+# add_subdirectory(Sort_Insertion)
+# add_subdirectory(Sort_Merge)
+# add_subdirectory(Sort_Quicksort)
+# add_subdirectory(Sort_Selection)
+# add_subdirectory(TopologicalSortingInADAG)
+# add_subdirectory(TreeTraversals_Inorder)
+# add_subdirectory(TreeTraversals_Postorder)
+# add_subdirectory(TreeTraversals_Preorder)
+# add_subdirectory(UnionFindAlgorithm)
+

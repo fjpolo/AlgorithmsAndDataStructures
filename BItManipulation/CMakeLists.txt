@@ -1,20 +1,15 @@
-# https://stackoverflow.com/questions/13703647/how-to-properly-add-include-directories-with-cmake
-# https://cmake.org/cmake/help/latest/guide/tutorial/index.html
+project(BitManipulation VERSION 0.1)
 
-# Minimum version of CMake
-cmake_minimum_required(VERSION 3.12) # version can be different
+set(TargetName ${PROJECT_NAME})
 
-# Project name
-project(DataStructures) #name of your project
+ADD_DEFINITIONS (-Wall -std=c++17 -pthread -g -D_WIN32_WINNT=0x0501)
+# target_compile_features(${TargetName} -Wall -std=gnu++11 -pthread -g)
 
-#
-# Main App
-#
-
-# Add executable
-#add_library(mainAppLibrary
-#            )
-set(mainAppSOURCES
-    src/main.cpp
-    ) 
-add_executable(mainApp ${mainAppSOURCES})  
+# set_property(TARGET TargetName PROPERTY CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17)
+# target_include_directories(${TargetName} src)
+# target_sources(${TargetName} PRIVATE src/main.cpp)
+# target_link_libraries(${TargetName} )
+set(mainAppSOURCES src/main.cpp) 
+# set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+add_executable(${TargetName} ${mainAppSOURCES}) 

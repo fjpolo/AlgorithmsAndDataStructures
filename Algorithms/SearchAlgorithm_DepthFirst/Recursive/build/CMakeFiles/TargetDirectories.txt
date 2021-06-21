@@ -1,0 +1,3 @@
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/Algorithms/SearchAlgorithm_DepthFirst/Recursive/build/CMakeFiles/mainApp.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/Algorithms/SearchAlgorithm_DepthFirst/Recursive/build/CMakeFiles/edit_cache.dir
+C:/Users/fpolo/Downloads/Franco/Courses/AlgorithmsAndDataStructures/Algorithms/SearchAlgorithm_DepthFirst/Recursive/build/CMakeFiles/rebuild_cache.dir
